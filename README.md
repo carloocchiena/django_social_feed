@@ -1,1 +1,2 @@
-# django_social_feed
+# Django social feed
+CURRENTLY WIP
