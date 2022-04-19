@@ -5,3 +5,22 @@ https://www.digitalocean.com/community/tutorials/working-with-django-templates-s
 
 
 
+- create base.html template 
+    - navbar
+    - boostrap
+    
+- create html templates
+    - for all profiles
+    - for all posts
+    - for managing profile
+
+- create views 
+- create a form for user modification
+- create login journey (with psw management and such)
+- add functional test
+- check what happens if user upload something different from a picture
+- add follow-unfollow function
+
+
+
+
