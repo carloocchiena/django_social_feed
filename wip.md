@@ -7,7 +7,7 @@ https://www.digitalocean.com/community/tutorials/working-with-django-templates-s
 
 - create base.html template 
     - navbar
-    - boostrap
+    - add real links and logo
     
 - create html templates
     - for all profiles
@@ -15,6 +15,7 @@ https://www.digitalocean.com/community/tutorials/working-with-django-templates-s
     - for managing profile
 
 - create views 
+- check profile_list page and finalize it
 - create a form for user modification
 - create login journey (with psw management and such)
 - add functional test

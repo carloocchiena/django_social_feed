@@ -8,7 +8,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    avatar = models.ImageField(upload_to='social/static/social/avatars/', null=True, blank=True) # to be checked
+    avatar = models.ImageField(upload_to='social/static/social/avatars/', null=True, blank=True) 
     follows = models.ManyToManyField('self', related_name='followed_by', symmetrical=False, blank=True)
     
     def __str__(self):
@@ -19,7 +19,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     text = models.TextField(max_length=1500)
     created_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='social/static/social/posts/', null=True, blank=True) # to be checked
+    image = models.ImageField(upload_to='social/static/social/posts/', null=True, blank=True)
     
     def __str__(self):
         return (f'{self.user.username} '
