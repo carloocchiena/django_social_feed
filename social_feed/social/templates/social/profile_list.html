@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block title %}
+<title>Here's all the profiles</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Here's all the profiles</h2>
+        <ul class = "list-unstyled">
+            {% for profiles in object_list %}
+                <li>
+                    <img class="rounded-circle" src="{{ profiles.avatar.url }}" style="max-width: 2em; margin-right: 10px;">
+                    <a href="{{ profiles.get_absolute_url }}">{{ profiles.user.username }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
