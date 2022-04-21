@@ -1,20 +1,28 @@
 from django.shortcuts import render
-from django.views.generic import ListView
-
+from django.views.generic import ListView, DetailView
+from django.views import View
 
 from . import models, forms
 
-# Create your views here.
+# Dummy home page to be substituted 
 def fake_home(request):
     return render(request, 'social/fake_home.html')
 
-# here
-class Profile(ListView):
+# List of all the profiles
+class ProfileList(ListView):
+    """View all profiles"""
     model = models.Profile
 
-    # template_name = 'social/profiles_list.html'
-    
-    # def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs)
-        # context['profiles'] = models.Profile.objects.all()
-        # return context
+# View of each profile    
+class ProfileDetail(DetailView):
+    """View a specific profile"""
+    model = models.Profile
+
+"""
+# questo funziona ma la vista è decisamente più lineare vediamo se riesco a costruirla da lì.    
+def get_profile(request, pk):
+    profile = models.Profile.objects.get(pk=pk)
+    if request.method == 'POST':
+        pass
+    return render(request, 'social/profile_detail.html', {'profile': profile})
+"""

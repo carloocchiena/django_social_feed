@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{%block title %}
-<title>Here's all the profiles</title>
-{% endblock %}
+{% block title %}
+    <title>Here's all the profiles</title>
+{% endblock title %}
 
 {% block content %}
     <div class="container">
         <h2>Here's all the profiles</h2>
         <ul class = "list-unstyled">
-            {% for profiles in object_list %}
+            {% for profile in object_list %}
                 <li>
-                    <img class="rounded-circle" src="{{ profiles.avatar.url }}" style="max-width: 2em; margin-right: 10px;">
-                    <a href="{{ profiles.get_absolute_url }}">{{ profiles.user.username }}</a>
+                    <!-- probably ref to https://stackoverflow.com/questions/36373977/align-text-next-to-image-using-bootstrap -->
+                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
+                    <div d-flex>
+                        <a href="{% url 'social:profile_detail' profile.id %}"> {{ profile.user.username }} </a>
+                        <p class="mr-4"><small> {{ profile.followed_by.count }} followers </small></p>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
+        <!-- come rendere i contenuti dei post? -->
     </div>
-{% endblock %}
+{% endblock content %}
