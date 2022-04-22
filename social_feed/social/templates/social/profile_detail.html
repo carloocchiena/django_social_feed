@@ -19,6 +19,34 @@
                 <p>{{ profile.followed_by.count }} followers</p>
                 <p>{{ profile.following.count }} following</p>
             </div>
+        </div>
+
+        <p>{{ profile.user }}'s posts:</p>
+        <p>{{ profile.location }}</p>
+        <p>{{ post }}</p>
+  
+
+
+        
+
+        {% for post in context %}
+        <div class="card m-2">
+            <div class="card-body">
+                <p class="card-text">{{ post }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% for post in object_list %}
+        <div class="card m-2">
+            <div class="card-body">
+                <p class="card-text">{{ post }}</p>
+                {{ post.text }}
+                {{ post.user.username }}
+                {{ post.location }}
+                {{ post.created_at }}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
 

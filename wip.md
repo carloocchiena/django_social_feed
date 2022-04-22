@@ -21,6 +21,7 @@ https://www.digitalocean.com/community/tutorials/working-with-django-templates-s
 - add functional test
 - check what happens if user upload something different from a picture
 - add follow-unfollow function
+- clean all the dirty code in the files
 
 
 
