@@ -1,7 +1,14 @@
 from django import forms
 from . import models
 
-class Post(forms.ModelForm):
+# da testare
+class ProfileForm(forms.ModelForm):
+    """Manage user creation"""
+    class Meta:
+        model = models.Profile
+        fields = ['bio', 'location', 'birth_date', 'avatar']
+        
+class PostForm(forms.ModelForm):
     """Manage post creation"""
     class Meta:
         model = models.Post

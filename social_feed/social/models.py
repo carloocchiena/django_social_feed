@@ -16,7 +16,7 @@ class Profile(models.Model):
     
 class Post(models.Model):
     """Create post model and manage their attributes""" 
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, related_name='posts', on_delete=models.DO_NOTHING)
     text = models.TextField(max_length=1500)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='social/static/social/posts/', null=True, blank=True)

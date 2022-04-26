@@ -11,45 +11,30 @@
         <div class="row">
             <div class="col-md-4">
                 <h2>{{ profile }}</h2>
-                <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
+                <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 8em;">
             </div>
             <div class="col-md-8">
                 <p>{{ profile.bio }}</p>
                 <!-- <p>{{ profile.user.username }}</p> -->
                 <p>{{ profile.followed_by.count }} followers</p>
                 <p>{{ profile.following.count }} following</p>
+                <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>
             </div>
         </div>
 
-        <p>{{ profile.user }}'s posts:</p>
-        <p>{{ profile.location }}</p>
-        <p>{{ post }}</p>
-  
-
-
-        
-
-        {% for post in context %}
-        <div class="card m-2">
+        {% for post in profile.user.posts.all %}
+        <div class="card m-3">
             <div class="card-body">
-                <p class="card-text">{{ post }}</p>
+                {% if post.image %}
+                    <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
+                {% endif %}
+                <p class="card-text">{{ post.text }}</p>
+                <p class="card-text"><small class="text-muted">{{ post.created_at }}</small></p>
             </div>
         </div>
         {% endfor %}
-        {% for post in object_list %}
-        <div class="card m-2">
-            <div class="card-body">
-                <p class="card-text">{{ post }}</p>
-                {{ post.text }}
-                {{ post.user.username }}
-                {{ post.location }}
-                {{ post.created_at }}
-            </div>
-        </div>
-        {% endfor %}
+
     </div>
-
-
 
 {% endblock content %}
     
