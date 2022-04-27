@@ -19,6 +19,17 @@
                 <p>{{ profile.followed_by.count }} followers</p>
                 <p>{{ profile.following.count }} following</p>
                 <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>
+
+                {% if profile.user == user %}
+                    <a href="{{ profile.get_edit_url }}" class="btn btn-primary">Edit Profile</a>
+                {% else %}
+                    {% if profile.is_following %}
+                        <a href="{{ profile.get_unfollow_url }}" class="btn btn-danger">Unfollow</a>
+                    {% else %}
+                        <a href="{{ profile.get_follow_url }}" class="btn text-light btn-info">Follow</a>
+                    {% endif %}
+                {% endif %}
+
             </div>
         </div>
 

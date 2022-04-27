@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, FormView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, FormView, UpdateView
 from django.views import View
 
 from . import models, forms
@@ -16,27 +17,15 @@ class ProfileList(ListView):
 # View of each profile    
 class ProfileDetail(DetailView):
     """View a specific profile"""
-    model = models.Profile
-    
-    """
-    def get_context_data(self, **kwargs):
-        context = super(ProfileDetail, self).get_context_data(**kwargs)
-        context['post'] = models.Post.objects.all() # filter(text=self.get_object())
-        # ok ora almeno torna tutti i post devo far tornare solo quelli del mio utente
-        # è già qualcosa!
-        return context
-    """
+    model = models.Profile  
     
 # riprendere da qui
-class ProfileForm(FormView):
-    """View to create a new profile"""
-    template_name = 'social/profile_form.html'
-    form_class = forms.ProfileForm
-    success_url = '/'
-    
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+class ProfileUpdateView(UpdateView):
+    """View to update an existing profile"""
+    model = models.Profile
+    fields = ['bio', 'location', 'birth_date', 'avatar'] # or '__all__'
+    success_url = reverse_lazy('social:profile_list') # to be updated to dashboard later
+
     
 class PostForm(FormView):
     """View to create a new post"""

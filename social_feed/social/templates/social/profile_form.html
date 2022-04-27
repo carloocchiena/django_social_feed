@@ -2,23 +2,21 @@
 {% load static %}
 
 {% block title %}
-    <title>Create a new account</title>
+    <title>Update {{ profile.username }}'s profile</title>
 {% endblock title %}
 
 {% block content %}
     <div class="container">
-        <h2>Create a new account</h2>
-        <ul class = "list-unstyled">
-            {% for profile in object_list %}
-                <li>
-                    <!-- probably ref to https://stackoverflow.com/questions/36373977/align-text-next-to-image-using-bootstrap -->
-                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
-                    <div d-flex>
-                        <a href="{% url 'social:profile_detail' profile.id %}"> {{ profile.user.username }} </a>
-                        <p class="mr-4"><small> {{ profile.followed_by.count }} followers </small></p>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+        <h2>Update your profile</h2>
+        <form action="" method="post">
+            <!-- impaginazione tutta da rivedere ma la logica c'è, va linkato a ciascun profilo'-->
+            {% csrf_token %}
+            {{ form.as_p }}
+            {{ form.bio }}
+            {{ form.location }}
+            {{ form.birth_date }}
+            {{ form.avatar}}
+            <input type="submit", value="Submit">
+        </form>
     </div>
 {% endblock content %}

@@ -2,11 +2,11 @@ from django import forms
 from . import models
 
 # da testare
-class ProfileForm(forms.ModelForm):
+class ProfileEditForm(forms.ModelForm):
     """Manage user creation"""
     class Meta:
         model = models.Profile
-        fields = ['bio', 'location', 'birth_date', 'avatar']
+        fields = ['bio', 'location', 'birth_date', 'avatar'] # or '__all__'
         
 class PostForm(forms.ModelForm):
     """Manage post creation"""
