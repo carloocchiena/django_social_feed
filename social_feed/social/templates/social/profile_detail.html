@@ -9,19 +9,25 @@
 
     <div class="container">
         <div class="row">
+
             <div class="col-md-4">
                 <h2>{{ profile }}</h2>
-                <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 8em;">
+                {% if profile.avatar %}
+                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 8em;">
+                {% else %}
+                    <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 8em;">
+                {% endif %}
             </div>
+
             <div class="col-md-8">
                 <p>{{ profile.bio }}</p>
                 <!-- <p>{{ profile.user.username }}</p> -->
                 <p>{{ profile.followed_by.count }} followers</p>
-                <p>{{ profile.following.count }} following</p>
-                <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>
+                <p>{{ profile.follows.count }} following</p>
+                <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>  
 
                 {% if profile.user == user %}
-                    <a href="{{ profile.get_edit_url }}" class="btn btn-primary">Edit Profile</a>
+                    <a href="/profile_update/{{ profile.id }}" class="btn text-light btn-info">Edit Profile</a>
                 {% else %}
                     {% if profile.is_following %}
                         <a href="{{ profile.get_unfollow_url }}" class="btn btn-danger">Unfollow</a>

@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="{% url 'social:profile_list' %}">All profiles</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/profile_detail/{{ user.profile.id }}">My Profile</a>
+                </li>
             </ul>
         </div>
     </nav>

@@ -19,14 +19,14 @@ class ProfileDetail(DetailView):
     """View a specific profile"""
     model = models.Profile  
     
-# riprendere da qui
+# Update user profile
 class ProfileUpdateView(UpdateView):
-    """View to update an existing profile"""
+    """View to update user profile"""
     model = models.Profile
     fields = ['bio', 'location', 'birth_date', 'avatar'] # or '__all__'
     success_url = reverse_lazy('social:profile_list') # to be updated to dashboard later
 
-    
+# wip    
 class PostForm(FormView):
     """View to create a new post"""
     template_name = 'social/post_form.html'

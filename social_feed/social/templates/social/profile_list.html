@@ -12,7 +12,9 @@
             {% for profile in object_list %}
                 <li>
                     <!-- probably ref to https://stackoverflow.com/questions/36373977/align-text-next-to-image-using-bootstrap -->
-                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
+                    {% if profile.avater %}
+                        <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
+                    {% endif %}
                     <div d-flex>
                         <a href="{% url 'social:profile_detail' profile.id %}"> {{ profile.user.username }} </a>
                         <p class="mr-4"><small> {{ profile.followed_by.count }} followers </small></p>
