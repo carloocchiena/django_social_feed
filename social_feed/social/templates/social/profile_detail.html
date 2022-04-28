@@ -29,11 +29,14 @@
                 {% if profile.user == user %}
                     <a href="/profile_update/{{ profile.id }}" class="btn text-light btn-info">Edit Profile</a>
                 {% else %}
-                    {% if profile.is_following %}
-                        <a href="{{ profile.get_unfollow_url }}" class="btn btn-danger">Unfollow</a>
-                    {% else %}
-                        <a href="{{ profile.get_follow_url }}" class="btn text-light btn-info">Follow</a>
-                    {% endif %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% if profile in user.profile.follows.all %}
+                            <button class="btn btn-danger" name="follow" value="unfollow">Unfollow</button>
+                        {% else %}
+                            <a href="{{ profile.get_follow_url }}" class="btn text-light btn-info">Follow</a>
+                        {% endif %}
+                    </form>
                 {% endif %}
 
             </div>

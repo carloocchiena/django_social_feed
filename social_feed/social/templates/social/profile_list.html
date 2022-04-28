@@ -12,7 +12,7 @@
             {% for profile in object_list %}
                 <li>
                     <!-- probably ref to https://stackoverflow.com/questions/36373977/align-text-next-to-image-using-bootstrap -->
-                    {% if profile.avater %}
+                    {% if profile.avatar %}
                         <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
                     {% endif %}
                     <div d-flex>
