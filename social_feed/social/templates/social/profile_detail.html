@@ -13,9 +13,9 @@
             <div class="col-md-4">
                 <h2>{{ profile }}</h2>
                 {% if profile.avatar %}
-                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 8em;">
+                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 7em;">
                 {% else %}
-                    <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 8em;">
+                    <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 7em;">
                 {% endif %}
             </div>
 
@@ -34,7 +34,7 @@
                         {% if profile in user.profile.follows.all %}
                             <button class="btn btn-danger" name="follow" value="unfollow">Unfollow</button>
                         {% else %}
-                            <a href="{{ profile.get_follow_url }}" class="btn text-light btn-info">Follow</a>
+                            <button class="btn btn-info text-light" name="follow" value="follow">Follow</button>
                         {% endif %}
                     </form>
                 {% endif %}
@@ -43,7 +43,7 @@
         </div>
 
         {% for post in profile.user.posts.all %}
-        <div class="card m-3">
+        <div class="card m-2">
             <div class="card-body">
                 {% if post.image %}
                     <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">

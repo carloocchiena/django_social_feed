@@ -14,31 +14,34 @@ class ProfileList(ListView):
     """View all profiles"""
     model = models.Profile
 
-# View of each profile    
-class ProfileDetail(DetailView):
-    """View a specific profile"""
+# View of each profile (not used at the moment)    
+# class ProfileDetail(DetailView):
+#     """View a specific profile"""
+#     model = models.Profile
+#     fields =   ['follows']   
+
+# View of each profile and follow-unfollow request
+class ProfileDetail(View):
+    """View details of profile and follow-unfollow request"""
     model = models.Profile
-    fields =   ['follows']
+    template_name = 'social/profile_detail.html'
     
-# test per follow-unfollow (che non va)
-# non posso chiamare una funzione post da questo modello
-# però posso chiamare un url dal bottone che attiva una funzione?
-# boh non ne vengo a capo, riproviamo
-def profile(self, request):
-    """Manage user profile, follows and unfollows"""
-    profile = Profile.objects.get(pk=pk)
-    if request.method == 'GET':
+    def get(self, request, pk):
+        profile = models.Profile.objects.get(pk=pk)
+        return render(request, 'social/profile_detail.html', {'profile': profile})
+    
+    def post(self, request, pk):
+        profile = models.Profile.objects.get(pk=pk)
         current_user_profile = request.user.profile
-        data = request.GET
+        data = request.POST
         action = data.get('follow')
         if action == 'follow':
             current_user_profile.follows.add(profile)
         elif action == 'unfollow':
             current_user_profile.follows.remove(profile)
         current_user_profile.save()
-
-    
-    
+        return render(request, 'social/profile_detail.html', {'profile': profile})
+        
 # Update user profile
 class ProfileUpdateView(UpdateView):
     """View to update user profile"""
