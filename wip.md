@@ -13,7 +13,3 @@ currently to be done:
 - add functional test
 - check what happens if user upload something different from a picture
 - clean all the dirty code in the files
-
-
-
-
