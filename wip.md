@@ -1,7 +1,7 @@
 
 
 currently to be done:
-- ~~ follow-unfollow logic ~~
+- ~~ follow-unfollow logic and details of follow-unfollow profiles ~~
 - dashboard
 - registration
 - post creation form

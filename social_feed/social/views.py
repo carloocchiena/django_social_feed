@@ -10,16 +10,20 @@ from . import models, forms
 def fake_home(request):
     return render(request, 'social/fake_home.html')
 
+
+# class Dashboard(View):'
+#     """Dashboard view with all posts items for current user"""
+#     model = models.Post
+#     template_name = 'social/dashboard.html'
+    
+#     def get(self, request, *args, **kwargs):
+#         return render(request, self.template_name, {'posts': self.model.objects.all()})
+     
+    
 # List of all the profiles
 class ProfileList(ListView):
     """View all profiles"""
     model = models.Profile
-
-# View of each profile (not used at the moment)    
-# class ProfileDetail(DetailView):
-#     """View a specific profile"""
-#     model = models.Profile
-#     fields =   ['follows']   
 
 # View of each profile and follow-unfollow request
 class ProfileDetail(View):
@@ -29,7 +33,7 @@ class ProfileDetail(View):
     
     def get(self, request, pk):
         profile = models.Profile.objects.get(pk=pk)
-        return render(request, 'social/profile_detail.html', {'profile': profile})
+        return render(request, self.template_name, {'profile': profile})
     
     def post(self, request, pk):
         profile = models.Profile.objects.get(pk=pk)
@@ -41,8 +45,18 @@ class ProfileDetail(View):
         elif action == 'unfollow':
             current_user_profile.follows.remove(profile)
         current_user_profile.save()
-        return render(request, 'social/profile_detail.html', {'profile': profile})
-        
+        return render(request, self.template_name, {'profile': profile})
+    
+# View follow-unfollow details of each profile
+class FollowDetail(DetailView):
+    model = models.Profile
+    fields = ['follows', 'followed_by']
+    template_name = 'social/follow_detail.html'
+    
+    def get_profile_followers(self, request, pk):
+        profile = models.Profile.objects.get(pk=pk)
+        return render(request, template_name, {'profile': profile})
+              
 # Update user profile
 class ProfileUpdateView(UpdateView):
     """View to update user profile"""

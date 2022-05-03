@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block title %}
+    <title>{{ profile }}'s page</title>
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <h2>{{ profile }}'s following:</h2>
+                <ul>
+                    {% for follow in profile.follows.all %}
+                        <li><a href="{% url 'social:profile_detail' follow.id %}"> {{ follow }} </a></li>
+                    {% endfor %}
+  
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <h2>{{ profile }}'s followed by:</h2>
+                <ul>
+                    {% for followed in  profile.followed_by.all  %}
+                        <li><a href="{% url 'social:profile_detail' followed.id %}"> {{ followed }} </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+    

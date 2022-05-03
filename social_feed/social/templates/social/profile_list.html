@@ -14,6 +14,8 @@
                     <!-- probably ref to https://stackoverflow.com/questions/36373977/align-text-next-to-image-using-bootstrap -->
                     {% if profile.avatar %}
                         <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
+                    {% else %}
+                        <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em;">
                     {% endif %}
                     <div d-flex>
                         <a href="{% url 'social:profile_detail' profile.id %}"> {{ profile.user.username }} </a>
