@@ -2,58 +2,34 @@
 {% load static %}
 
 {%block title %}
-    <title>{{ profile }}'s page</title>
+    <title>DSF Dashboard</title>
 {% endblock title %}
 
 {% block content %}
 
     <div class="container">
         <div class="row">
-
-            <div class="col-md-4">
-                <h2>{{ profile }}</h2>
-                {% if profile.avatar %}
-                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 7em;">
-                {% else %}
-                    <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 7em;">
-                {% endif %}
-            </div>
-
-            <div class="col-md-8">
-                <p>{{ profile.bio }}</p>
-                <!-- <p>{{ profile.user.username }}</p> -->
-                <p><a href="{% url 'social:follow_detail' profile.id %}">{{ profile.followed_by.count }} followers</p></a>
-                <p><a href="{% url 'social:follow_detail' profile.id %}">{{ profile.follows.count }} following</p></a>
-                <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>  
-
-                {% if profile.user == user %}
-                    <a href="/profile_update/{{ profile.id }}" class="btn text-light btn-info">Edit Profile</a>
-                {% else %}
-                    <form method="POST">
-                        {% csrf_token %}
-                        {% if profile in user.profile.follows.all %}
-                            <button class="btn btn-danger" name="follow" value="unfollow">Unfollow</button>
-                        {% else %}
-                            <button class="btn btn-info text-light" name="follow" value="follow">Follow</button>
-                        {% endif %}
-                    </form>
-                {% endif %}
-
-            </div>
+            <h2>What's about, {{ user.username }}?</h2>
+            <form action="" method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit", value="Submit">
+            </form>
         </div>
 
-        {% for post in profile.user.posts.all %}
-        <div class="card m-2">
-            <div class="card-body">
-                {% if post.image %}
-                    <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
-                {% endif %}
-                <p class="card-text">{{ post.text }}</p>
-                <p class="card-text"><small class="text-muted">{{ post.created_at }}</small></p>
+        <div class="row">
+            {% for post in posts %}
+            <div class="card m-2">
+                <div class="card-body">
+                    {% if post.image %}
+                        <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
+                    {% endif %}
+                    <p class="card-text">{{ post.text }}</p>
+                    <p class="card-text"><small class="text-muted">{{ post.created_at }} by <a href="{% url 'social:profile_detail' post.user.id %}"> {{ post.user }} </a></small></p>
+                </div>
             </div>
-        </div>
-        {% endfor %}
-
+            {% endfor %}
+        </div>       
     </div>
 
 {% endblock content %}

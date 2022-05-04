@@ -8,14 +8,10 @@
 {% block content %}
     <div class="container">
         <h2>Update your profile</h2>
-        <form action="" method="post">
+        <form action="" method="post" enctype='multipart/form-data'>
             <!-- impaginazione tutta da rivedere ma la logica c'è, va linkato a ciascun profilo'-->
             {% csrf_token %}
             {{ form.as_p }}
-            {{ form.bio }}
-            {{ form.location }}
-            {{ form.birth_date }}
-            {{ form.avatar}}
             <input type="submit", value="Submit">
         </form>
     </div>
