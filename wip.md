@@ -3,7 +3,7 @@
 currently to be done:
 - ~~ follow-unfollow logic and details of follow-unfollow profiles ~~
 - dashboard (praticamente finita)
-- registration
+- registration (finita ma ci sono vari bugs)
 - ~~ post creation form ~~
 
 
@@ -15,4 +15,3 @@ currently to be done:
 - check what happens if user upload something different from a picture
 - clean all the dirty code in the files
 
-cazz sono commosso funziona!

@@ -27,7 +27,8 @@
                 <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>  
 
                 {% if profile.user == user %}
-                    <a href="/profile_update/{{ profile.id }}" class="btn text-light btn-info">Edit Profile</a>
+                    <p><a href="/profile_update/{{ profile.id }}" class="btn text-light btn-info">Edit Profile</a></p>
+                    <a href="{% url 'social:logout' %}" class="btn text-light btn-danger">Logout</a>
                 {% else %}
                     <form method="POST">
                         {% csrf_token %}
