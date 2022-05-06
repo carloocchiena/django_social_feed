@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, FormView, UpdateView
 
 from . import models, forms
 
-# Main dashboard + post creation view WIP)
+# Main dashboard + post creation view
 class Dashboard(View):
     """Dashboard view with all posts items for current user"""
     model = models.Post

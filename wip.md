@@ -12,6 +12,6 @@ currently to be done:
 - review completa frontend
 - create login journey (with psw management and such)
 - add functional test
-- check what happens if user upload something different from a picture
+- ~~ check what happens if user upload something different from a picture ~~
 - clean all the dirty code in the files
 
