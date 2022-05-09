@@ -5,7 +5,8 @@ currently to be done:
 - dashboard (praticamente finita)
 - registration (finita ma ci sono vari bugs)
 - ~~ post creation form ~~
-
+- ~~ modificati tutti gli url con username invece che pk ~~
+- ottimizzare navbar
 
 
 - check profile_list page and finalize it
