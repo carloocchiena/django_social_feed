@@ -1,6 +1,6 @@
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, FormView, UpdateView
@@ -66,12 +66,14 @@ class ProfileDetail(View):
     model = models.Profile
     template_name = 'social/profile_detail.html'
     
-    def get(self, request, pk):
-        profile = models.Profile.objects.get(pk=pk)
+    def get(self, request, username):
+        # profile = models.Profile.objects.get(pk=pk)
+        profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
         return render(request, self.template_name, {'profile': profile})
     
-    def post(self, request, pk):
-        profile = models.Profile.objects.get(pk=pk)
+    def post(self, request, username):
+        # profile = models.Profile.objects.get(pk=pk)
+        profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
         current_user_profile = request.user.profile
         data = request.POST
         action = data.get('follow')
@@ -86,16 +88,18 @@ class ProfileDetail(View):
 class FollowDetail(DetailView):
     model = models.Profile
     fields = ['follows', 'followed_by']
+    slug_field = "user__username"
     template_name = 'social/follow_detail.html'
     
-    def get_profile_followers(self, request, pk):
-        profile = models.Profile.objects.get(pk=pk)
+    def get_profile_followers(self, request, username):
+        profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
         return render(request, template_name, {'profile': profile})
               
 # Update user profile
 class ProfileUpdateView(UpdateView):
     """View to update user profile"""
     model = models.Profile
+    slug_field = "user__username"
     fields = ['bio', 'location', 'birth_date', 'avatar'] # or '__all__'
     success_url = reverse_lazy('social:profile_list') # to be updated to dashboard later
 

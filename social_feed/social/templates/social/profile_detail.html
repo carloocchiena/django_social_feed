@@ -22,12 +22,12 @@
             <div class="col-md-8">
                 <p>{{ profile.bio }}</p>
                 <!-- <p>{{ profile.user.username }}</p> -->
-                <p><a href="{% url 'social:follow_detail' profile.id %}">{{ profile.followed_by.count }} followers</p></a>
-                <p><a href="{% url 'social:follow_detail' profile.id %}">{{ profile.follows.count }} following</p></a>
+                <p><a href="{% url 'social:follow_detail' profile.user %}">{{ profile.followed_by.count }} followers</p></a>
+                <p><a href="{% url 'social:follow_detail' profile.user %}">{{ profile.follows.count }} following</p></a>
                 <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>  
 
                 {% if profile.user == user %}
-                    <p><a href="/profile_update/{{ profile.id }}" class="btn text-light btn-info">Edit Profile</a></p>
+                    <p><a href="/profile_update/{{ profile.user }}" class="btn text-light btn-info">Edit Profile</a></p>
                     <a href="{% url 'social:logout' %}" class="btn text-light btn-danger">Logout</a>
                 {% else %}
                     <form method="POST">

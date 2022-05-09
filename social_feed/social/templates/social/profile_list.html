@@ -18,7 +18,7 @@
                         <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em;">
                     {% endif %}
                     <div d-flex>
-                        <a href="{% url 'social:profile_detail' profile.id %}"> {{ profile.user.username }} </a>
+                        <a href="{% url 'social:profile_detail' profile.user %}"> {{ profile.user.username }} </a>
                         <p class="mr-4"><small> {{ profile.followed_by.count }} followers </small></p>
                     </div>
                 </li>
