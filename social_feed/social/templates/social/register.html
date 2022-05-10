@@ -2,48 +2,60 @@
 
 {% block content %}
 
-<div class="column">
-    <h2 class="title is-2">Jump in! In just 1,5 minutes!</h2>
-    <h3 class="title is-3">Create a free account</h3>
-</div>
+<div class="container">
+    <div class="column">
+        <div class="row align-items-start">
+            <div class="col">
+                <h2>Jump in! In just 1,5 minutes!</h2>
+                <h3>Create a free account</h3>
+                <p>
+                    Already an account?
+                    <a href="{% url 'social:login' %}">Login!</a>
+                </p>
+            </div>
 
-<div class="column is-one-third">
-    <div class="block">
-        <form method="post" action="{% url 'social:register' %}">
-            {% csrf_token %} 
-            {% for field in form %}
-                <div class="field">
+            <div class="col">
+                <h3>Register</h3>
+                <form method="post" action="{% url 'social:register' %}">
                     <div class="form-group">
-                        <label class="label">{{ field.label_tag }} </label>
-                        <div class="control has-icons-left">
-                            <input
-                                class="input"
-                                type="{% if 'password' in field.label_tag %}password{% else %}text{% endif %}"
-                                id="{{ field.auto_id }}"
-                                name="{{ field.html_name }}"
-                                class="form-control"
-                                maxlength="{% if 'username' in field.label_tag %}20{% endif %}"
-                                id="{{ field.id_for_label }}"
-                                required
-                            />
-                            <span class="icon is-small is-left">
-                                <i class="{% if 'password' in field.label_tag %}fa fa-lock{% else %}fa fa-at{% endif %}"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                    {% if field.errors %} 
-                        {% for error in field.errors %}
-                            <p style="font-size: 13px;">
-                                {{ error|escape }}
-                            </p><br>
-                        {% endfor %} 
-                    {% endif %} 
-            {% endfor %}
-                    <button type="submit" class="button is-info is-fullwidth">Register</button>
-                
-        </form>
+                        {% csrf_token %} 
+                        {% for field in form %}
+                            <div class="field">
+                                <div class="form-group mx-auto mb-2">
+                                    <label class="form-label">{{ field.label_tag }} </label>
+                                    <div class="control has-icons-left">
+                                        <input
+                                            class="input"
+                                            type="{% if 'password' in field.label_tag %}password{% else %}text{% endif %}"
+                                            id="{{ field.auto_id }}"
+                                            name="{{ field.html_name }}"
+                                            class="form-control"
+                                            maxlength="{% if 'username' in field.label_tag %}20{% endif %}"
+                                            id="{{ field.id_for_label }}"
+                                            placeholder="{% if 'password' in field.label_tag %}**********{% else %}Your username{% endif %}"
+                                            required
+                                        />
+                                        <span class="icon is-small is-left">
+                                            <i class="{% if 'password' in field.label_tag %}fa fa-lock{% else %}fa fa-at{% endif %}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="error-message">
+                                {% if field.errors %} 
+                                    {% for error in field.errors %}
+                                        <p style="font-size: 13px;">
+                                            {{ error|escape }}
+                                        </p>
+                                    {% endfor %} 
+                                {% endif %} 
+                            </div>
+                        {% endfor %}
+                            <button type="submit" class="btn btn-info text-light">Register</button>
+                    </div>    
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
