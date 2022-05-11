@@ -4,6 +4,9 @@ currently to be done:
 - ~~ follow-unfollow logic and details of follow-unfollow profiles ~~
 - giro frontend
 - ~~ post creation form ~~
+- sistemare upload foto nella dashboard
+- order by dei post nel profilo update
+- permettere di eliminare i post (va aggiunta la view)
 
 
 
