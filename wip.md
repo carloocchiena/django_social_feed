@@ -9,7 +9,6 @@ currently to be done:
 - permettere di eliminare i post (va aggiunta la view)
 
 
-
 - check profile_list page and finalize it
 - review completa frontend
 - ~~ create login journey (with psw management and such) ~~
