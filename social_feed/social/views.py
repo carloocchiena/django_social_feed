@@ -53,7 +53,9 @@ class UserRegistration(View):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('social:profile_update', pk=user.profile.pk)
+            return redirect('social:profile_update', slug=user.profile.user)
+        else:
+            return render(request, self.template_name, {'form': form})
      
 # List of all the profiles
 class ProfileList(ListView):
@@ -101,7 +103,12 @@ class ProfileUpdateView(UpdateView):
     model = models.Profile
     slug_field = "user__username"
     fields = ['bio', 'location', 'birth_date', 'avatar'] # or '__all__'
-    success_url = reverse_lazy('social:profile_list') # to be updated to dashboard later
+    success_url = reverse_lazy('social:dashboard')
+    
+    # User can updates only his\her profile, or get a 404 error
+    def get_queryset(self):
+        owner = self.request.user
+        return self.model.objects.filter(user=owner)
 
 # wip (non usata al momento)   
 class PostForm(FormView):
