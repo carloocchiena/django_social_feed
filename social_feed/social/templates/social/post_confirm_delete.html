@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Update {{ profile.username }}'s post</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h2>Post will be deleted: are you sure?</h2>
+        <div class="card m-2">
+            <div class="card-body">
+                {% if post.image %}
+                            <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
+                {% endif %}
+                <p>{{ post.text }}</p>
+            </div>
+        </div>
+
+   
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger text-light" type="submit", value="Delete">
+            <a href="/" class="btn text-light btn-info">Back to posting</a>
+        </form>
+    </div>
+{% endblock content %}

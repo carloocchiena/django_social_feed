@@ -14,6 +14,7 @@ urlpatterns = [
     path('profile_list/', login_required(views.ProfileList.as_view()), name='profile_list'),
     path('follow_detail/<str:slug>/', login_required(views.FollowDetail.as_view()), name='follow_detail'),
     path('profile_detail/<str:username>/', login_required(views.ProfileDetail.as_view()), name='profile_detail'),
-    path('profile_update/<str:slug>/', login_required(views.ProfileUpdateView.as_view()), name='profile_update'),
+    path('profile_update/<str:slug>/', login_required(views.ProfileUpdate.as_view()), name='profile_update'),
+    path('post_delete/<slug:slug>/', login_required(views.PostDelete.as_view()), name='post_delete'),
     path('post_form/', views.PostForm.as_view(), name='post_form'), # da validare
 ]

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView, FormView, UpdateView
+from django.views.generic import ListView, DetailView, FormView, UpdateView, DeleteView
 
 from . import models, forms
 
@@ -98,7 +98,7 @@ class FollowDetail(DetailView):
         return render(request, template_name, {'profile': profile})
               
 # Update user profile
-class ProfileUpdateView(UpdateView):
+class ProfileUpdate(UpdateView):
     """View to update user profile"""
     model = models.Profile
     slug_field = "user__username"
@@ -109,6 +109,19 @@ class ProfileUpdateView(UpdateView):
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
+    
+# Post deleting view (wip)
+class PostDelete(DeleteView):
+    model = models.Post
+    slug_field = "id"
+    success_url = reverse_lazy('social:dashboard')
+    
+    # Users can delete only their posts, or get a 404 error
+    def get_queryset(self):
+        owner = self.request.user
+        return self.model.objects.filter(user=owner)
+    
+    
 
 # wip (non usata al momento)   
 class PostForm(FormView):
