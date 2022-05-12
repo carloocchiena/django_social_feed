@@ -14,10 +14,24 @@ class PostForm(forms.ModelForm):
         model = models.Post
         fields = ['text', 'image']
         widgets = {
-            'text': forms.Textarea(attrs={'rows': 4, 
-                                          'cols': 40, 
-                                          'placeholder': 'What\'s happening?'
+            'text': forms.Textarea(attrs={
+                'label': '',
+                'class': 'form-control',
+                'name': 'post_text',
+                'id': 'post_text',
+                'rows': 4, 
+                'cols': 40, 
+                'placeholder': 'What\'s happening?',
+                'required': True
                                           },
+            ),
+            'image': forms.FileInput(attrs={
+                'label': '',
+                'class': 'form-control',
+                'name': 'post_img',
+                'id': 'post_img',
+                'placeholder': 'Upload a picture!',
+             }
             )
         }
         

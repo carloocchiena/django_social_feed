@@ -8,27 +8,37 @@
 {% block content %}
 
     <div class="container">
-        <div class="row">
-            <h2>What's about, {{ user.username }}?</h2>
-            <form action="" method="post" enctype='multipart/form-data'>
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit", value="Submit">
-            </form>
-        </div>
-
-        <div class="row">
-            {% for post in posts %}
-            <div class="card m-2">
-                <div class="card-body">
-                    {% if post.image %}
-                        <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
-                    {% endif %}
-                    <p class="card-text">{{ post.text }}</p>
-                    <p class="card-text"><small class="text-muted">{{ post.created_at }} by <a href="{% url 'social:profile_detail' post.user.profile.id %}"> {{ post.user }} </a></small></p>
+        <div class="row align-items-start">
+            <div class="col-8">
+                <h2>&nbsp;It's live now!</h2>
+                {% for post in posts %}
+                <div class="card m-2">
+                    <div class="card-body">
+                        {% if post.image %}
+                            <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
+                        {% endif %}
+                        <p class="card-text">{{ post.text }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">{{ post.created_at }} by <a href="{% url 'social:profile_detail' post.user.profile.user %}"> {{ post.user }} </a>
+                            </small></p>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        
+            <div class="col">
+                <h2>What's about, {{ user.username }}?</h2>
+                <form action="" method="post" enctype='multipart/form-data'>
+                    <div class="form-group">
+                        {% csrf_token %}
+                        {% for item in form %}
+                            <div class="form-group mx-auto mb-2">
+                                {{ item }}
+                            </div>
+                        {% endfor %}
+                    <input class="btn btn-info text-light" type="submit", value="Submit">
+                </form>
+            </div>
         </div>       
     </div>
 
