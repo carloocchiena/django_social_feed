@@ -7,22 +7,27 @@
 
 {% block content %}
     <div class="container">
-        <h2>Here's all the profiles</h2>
-        <ul class = "list-unstyled">
-            {% for profile in object_list %}
-                <li>
-                    <!-- probably ref to https://stackoverflow.com/questions/36373977/align-text-next-to-image-using-bootstrap -->
-                    {% if profile.avatar %}
-                        <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
-                    {% else %}
-                        <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em;">
-                    {% endif %}
-                    <div d-flex>
-                        <a href="{% url 'social:profile_detail' profile.user %}"> {{ profile.user.username }} </a>
+        <h2>&nbsp;Here's all the profiles</h2>
+        {% for profile in object_list %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card w-75 m-2">
+                    <div class="card-body">
+                        <div class="col">
+                        {% if profile.avatar %}
+                            <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
+                            {% else %}
+                            <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em;">
+                        {% endif %}
+                        <h5 class="card-title">{{ profile.user.username }}</h5>
+                        <p class="card-text">{{ profile.bio|make_list|slice:':120'|join:'' }}...</p>
+                        </div>
                         <p class="mr-4"><small> {{ profile.followed_by.count }} followers </small></p>
+                        <a href="{% url 'social:profile_detail' profile.user %}" class="btn btn-info text-light">View Profile</a>
                     </div>
-                </li>
-            {% endfor %}
-        </ul>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
     </div>
 {% endblock content %}

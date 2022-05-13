@@ -19,9 +19,13 @@
                         {% endif %}
                         <p class="card-text">{{ post.text }}</p>
                         <p class="card-text">
-                            <small class="text-muted">{{ post.created_at }} by <a href="{% url 'social:profile_detail' post.user.profile.user %}"> {{ post.user }} </a>
-                            </small></p>
-                            da cancellare{{ post.id }}
+                            <small class="text-muted">
+                                {{ post.created_at }} by <a href="{% url 'social:profile_detail' post.user.profile.user %}">{{ post.user }}</a>
+                                {% if post.user.profile.user == request.user %}
+                                    &nbsp;<a href="{% url 'social:post_delete' post.id %}"><i class="fa fa-trash"></i></a>
+                                {% endif %}
+                            </small>
+                        </p>
                     </div>
                 </div>
                 {% endfor %}

@@ -5,8 +5,9 @@ currently to be done:
 - giro frontend
 - ~~ post creation form ~~
 - sistemare upload foto nella dashboard
+- sistemare layout lista profili
 - order by dei post nel profilo update
-- permettere di eliminare i post (la vieww c'è e funziona, aggiunto link dinamico sotto ogni post, seguito flusso, migliorata la pagina di cancellazione, a fine di tutto eliminare id post ora messo temporaneamente)
+- ~~ permettere di eliminare i post ~~ 
 - finire review UI
 
 

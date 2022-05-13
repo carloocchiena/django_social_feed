@@ -2,17 +2,36 @@
 {% load static %}
 
 {% block title %}
-    <title>Update {{ profile.username }}'s profile</title>
+    <title>Update {{ profile.user.username }}'s profile</title>
 {% endblock title %}
 
 {% block content %}
     <div class="container">
-        <h2>Update your profile</h2>
+        <h2>Update your profile, {{ profile.user.username }}</h2>
         <form action="" method="post" enctype='multipart/form-data'>
-            <!-- impaginazione tutta da rivedere ma la logica c'è, va linkato a ciascun profilo'-->
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit", value="Submit">
+            <div class="form-group">
+                {% for item in form %}
+                    <div class="form-group mx-auto mb-2">
+                        {{ item.label }}</br>
+                        {{ item }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="error-message">
+                {% if form.non_field_errors %} 
+                
+                    {% for error in form.non_field_errors %}
+                        <p style="font-size: 13px;">
+                            {{ error|escape }}
+                        </p>
+                    {% endfor %} 
+                
+                {% endif %}
+            </div>
+
+            <input type="submit" class="btn btn-info text-light", value="Submit">
         </form>
     </div>
 {% endblock content %}

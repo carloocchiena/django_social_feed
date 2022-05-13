@@ -119,9 +119,7 @@ class PostDelete(DeleteView):
     # Users can delete only their posts, or get a 404 error
     def get_queryset(self):
         owner = self.request.user
-        return self.model.objects.filter(user=owner)
-    
-    
+        return self.model.objects.filter(user=owner)  
 
 # wip (non usata al momento)   
 class PostForm(FormView):
