@@ -28,7 +28,7 @@ def create_profile(sender, instance, created, **kwargs):
 
 # Model to handle posts   
 class Post(models.Model):
-    """Create post model and manage their attributes""" 
+    """Create post model and manage its attributes""" 
     user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
     text = models.TextField(max_length=1500)
     created_at = models.DateTimeField(auto_now_add=True)
