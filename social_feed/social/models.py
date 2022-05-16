@@ -34,6 +34,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='social/static/social/posts/', null=True, blank=True)
     
+    class Meta:
+        ordering = ['-created_at']
+    
     def __str__(self):
         return (f'{self.user.username} '
                 f'{self.created_at:%Y-%m-%d %H:%M} '

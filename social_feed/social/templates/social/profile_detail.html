@@ -8,20 +8,21 @@
 {% block content %}
 
     <div class="container">
-        <div class="row">
-
-            <div class="col-md-4">
-                <h2>{{ profile }}</h2>
-                {% if profile.avatar %}
-                    <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 7em;">
-                {% else %}
-                    <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 7em;">
-                {% endif %}
+        <div class="row mt-3 md-3">
+            <div class="col-4 md-4">
+                <div class="col-6 d-flex">
+                    {% if profile.avatar %}
+                        <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 7em; margin:auto; display: block;">
+                    {% else %}
+                        <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 7em;">
+                    {% endif %}
+                    <div class="col align-self-center">
+                        <h2 class="text-center">{{ profile.user.username }}</h2>
+                    </div>
+                </div>
             </div>
-
             <div class="col-md-8">
                 <p>{{ profile.bio }}</p>
-                <!-- <p>{{ profile.user.username }}</p> -->
                 <p><a href="{% url 'social:follow_detail' profile.user %}">{{ profile.followed_by.count }} followers</p></a>
                 <p><a href="{% url 'social:follow_detail' profile.user %}">{{ profile.follows.count }} following</p></a>
                 <p><i class='fas fa-map-marker-alt'>&nbsp;</i>{{ profile.location }}</p>  
@@ -39,10 +40,8 @@
                         {% endif %}
                     </form>
                 {% endif %}
-
             </div>
         </div>
-
         {% for post in profile.user.posts.all %}
         <div class="card m-2">
             <div class="card-body">
@@ -54,7 +53,6 @@
             </div>
         </div>
         {% endfor %}
-
     </div>
 
 {% endblock content %}

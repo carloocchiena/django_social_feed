@@ -7,25 +7,27 @@ from django.views.generic import ListView, DetailView, FormView, UpdateView, Del
 
 from . import models, forms
 
-# Main dashboard + post creation view
 class Dashboard(View):
-    """Dashboard view with all posts items for current user"""
+    """Dashboard view with all posts items for current user.
+    GET return list of posts in ascending order from user followed by the user and user itself.
+    POST add a post from logged user.
+    """
     model = models.Post
     template_name = 'social/dashboard.html'
     
     def get(self, request):
         """Manage posts views for the followed users and the user itself"""
         form = forms.PostForm(request.POST or None)
-        user_posts = models.Post.objects.filter(user=request.user).order_by('-created_at')
-        follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by('-created_at')
+        user_posts = models.Post.objects.filter(user=request.user)
+        follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
         posts = user_posts | follower_posts
         return render(request, self.template_name, {'posts': posts, 'form': form})
     
     def post(self, request):
         """Manage posts creation for the user"""
         form = forms.PostForm(request.POST, request.FILES or None)
-        user_posts = models.Post.objects.filter(user=request.user).order_by('-created_at')
-        follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all()).order_by('-created_at')
+        user_posts = models.Post.objects.filter(user=request.user)
+        follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
         posts = user_posts | follower_posts
         if form.is_valid():
             post = form.save(commit=False)
@@ -35,9 +37,11 @@ class Dashboard(View):
             
         return render(request, self.template_name, {'posts': posts, 'form': form})
     
-# User registration view
 class UserRegistration(View):
-    """Manage user registration"""
+    """Manage user registration.
+    GET render the form.
+    POST create a new user and redirect to the user profile.
+    """
     model = models.Profile
     template_name = 'social/register.html'
     
@@ -57,14 +61,15 @@ class UserRegistration(View):
         else:
             return render(request, self.template_name, {'form': form})
      
-# List of all the profiles
 class ProfileList(ListView):
     """View all profiles"""
     model = models.Profile
 
-# View of each profile and follow-unfollow request
 class ProfileDetail(View):
-    """View details of profile and follow-unfollow request"""
+    """View details of profile and follow-unfollow request.
+    GET return the profile details.
+    POST manage follow-unfollow request.
+    """
     model = models.Profile
     template_name = 'social/profile_detail.html'
     
@@ -86,8 +91,8 @@ class ProfileDetail(View):
         current_user_profile.save()
         return render(request, self.template_name, {'profile': profile})
     
-# View follow-unfollow details of each profile
 class FollowDetail(DetailView):
+    """Display followers and following."""
     model = models.Profile
     fields = ['follows', 'followed_by']
     slug_field = "user__username"
@@ -97,9 +102,8 @@ class FollowDetail(DetailView):
         profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
         return render(request, template_name, {'profile': profile})
               
-# Update user profile
 class ProfileUpdate(UpdateView):
-    """View to update user profile"""
+    """View to update user profile."""
     model = models.Profile
     slug_field = "user__username"
     fields = ['bio', 'location', 'birth_date', 'avatar'] # or '__all__'
@@ -110,8 +114,8 @@ class ProfileUpdate(UpdateView):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
     
-# Post deleting view (wip)
 class PostDelete(DeleteView):
+    """Delete a post for logged user"""
     model = models.Post
     slug_field = "id"
     success_url = reverse_lazy('social:dashboard')
