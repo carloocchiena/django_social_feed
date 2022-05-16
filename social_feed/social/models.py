@@ -40,4 +40,4 @@ class Post(models.Model):
     def __str__(self):
         return (f'{self.user.username} '
                 f'{self.created_at:%Y-%m-%d %H:%M} '
-                f'{self.text[:150]}...')
+                f'{self.text[:20]}...')
