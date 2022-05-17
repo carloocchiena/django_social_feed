@@ -31,6 +31,7 @@ class PostForm(forms.ModelForm):
                 'name': 'post_img',
                 'id': 'post_img',
                 'placeholder': 'Upload a picture!',
+                'onchange': 'document.getElementById("imageBox").src = window.URL.createObjectURL(this.files[0])',
              }
             )
         }

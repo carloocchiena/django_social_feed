@@ -16,5 +16,4 @@ urlpatterns = [
     path('profile_detail/<str:username>/', login_required(views.ProfileDetail.as_view()), name='profile_detail'),
     path('profile_update/<str:slug>/', login_required(views.ProfileUpdate.as_view()), name='profile_update'),
     path('post_delete/<slug:slug>/', login_required(views.PostDelete.as_view()), name='post_delete'),
-    path('post_form/', views.PostForm.as_view(), name='post_form'), # da validare
 ]
