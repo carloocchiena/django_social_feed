@@ -4,7 +4,7 @@ currently to be done:
 - ~~ follow-unfollow logic and details of follow-unfollow profiles ~~
 - giro frontend
 - ~~ post creation form ~~
-- sistemare upload foto nella dashboard (provare https://stackoverflow.com/questions/24219446/render-image-without-saving)
+- sistemare upload foto nella dashboard (fatto con JS, da sistemare layout!)
 - ~~ order by dei post nel profilo update~~
 - ~~ permettere di eliminare i post ~~ 
 - finire review UI
