@@ -125,12 +125,3 @@ class PostDelete(DeleteView):
         owner = self.request.user
         return self.model.objects.filter(user=owner)  
 
-# wip (non usata al momento)   
-class PostForm(FormView):
-    """View to create a new post"""
-    template_name = 'social/profile_form.html'
-    success_url = '/'
-    
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)

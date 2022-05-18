@@ -15,7 +15,7 @@
                 <div class="card m-2">
                     <div class="card-body">
                         {% if post.image %}
-                            <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
+                            <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;"/>
                         {% endif %}
                         <p class="card-text">{{ post.text }}</p>
                         <p class="card-text">
@@ -37,11 +37,14 @@
                     <div class="form-group">
                         {% csrf_token %}
                         {% for item in form %}
-                            <div class="form-group mx-auto mb-2">
-                                {{ item }}
-                            </div>
+                            <div class="form-group mx-auto mb-2"> 
+                                {{ item }} 
+                             </div>
                         {% endfor %}
+                    </div>
                     <input class="btn btn-info text-light" type="submit", value="Submit">
+                    <p>Image preview:</p>
+                    <img id="imageBox" src="#" alt="" style="max-width: 200px;"/>
                 </form>
             </div>
         </div>       
