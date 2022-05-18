@@ -15,9 +15,9 @@
                     <div class="card-body">
                         <div class="col d-flex">
                         {% if profile.avatar %}
-                            <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em;">
+                            <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em; max-height: 2em;">
                             {% else %}
-                            <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em;">
+                            <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em; max-height: 2em;">
                         {% endif %}
                         <h5 class="card-title align-self-center">&nbsp;{{ profile.user.username }}</h5>
                         </div>

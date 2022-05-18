@@ -105,8 +105,9 @@ class FollowDetail(DetailView):
 class ProfileUpdate(UpdateView):
     """View to update user profile."""
     model = models.Profile
+    form_class = forms.ProfileEditForm
     slug_field = "user__username"
-    fields = ['bio', 'location', 'birth_date', 'avatar'] # or '__all__'
+    template_name_suffix = '_update'
     success_url = reverse_lazy('social:dashboard')
     
     # User can updates only his\her profile, or get a 404 error

@@ -9,24 +9,50 @@
 
     <div class="container">
         <div class="row">
-
-            <div class="col-md-4">
-                <h2>{{ profile }}'s following:</h2>
-                <ul>
-                    {% for follow in profile.follows.all %}
-                        <li><a href="{% url 'social:profile_detail' follow.user %}"> {{ follow }} </a></li>
-                    {% endfor %}
-  
-                </ul>
+            <div class="col-4">
+                <h2>&nbsp;{{ profile }}'s following:</h2>
+                {% for profile in profile.follows.all %}
+                <div class="card m-2">
+                    <div class="card-body">
+                        <div class="col d-flex">
+                        {% if profile.avatar %}
+                            <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em; max-height: 2em;">
+                            {% else %}
+                            <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em;">
+                        {% endif %}
+                        <h5 class="card-title align-self-center">&nbsp;{{ profile.user.username }}</h5>
+                        </div>
+                        <div class="col">
+                            <p class="card-text">{{ profile.bio|make_list|slice:':20'|join:'' }}...</p>
+                        </div>
+                        <p class="mr-4"><small> {{ profile.followed_by.count }} followers </small></p>
+                        <a href="{% url 'social:profile_detail' profile.user %}" class="btn btn-info text-light">View Profile</a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
 
-            <div class="col-md-4">
-                <h2>{{ profile }}'s followed by:</h2>
-                <ul>
-                    {% for followed in  profile.followed_by.all  %}
-                        <li><a href="{% url 'social:profile_detail' followed.user %}"> {{ followed }} </a></li>
-                    {% endfor %}
-                </ul>
+            <div class="col-4">
+                <h2>&nbsp;{{ profile }}'s followed by:</h2>
+                {% for profile in  profile.followed_by.all  %}
+                <div class="card m-2">
+                    <div class="card-body">
+                        <div class="col d-flex">
+                        {% if profile.avatar %}
+                            <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 2em; max-height: 2em;">
+                            {% else %}
+                            <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em;">
+                        {% endif %}
+                        <h5 class="card-title align-self-center">&nbsp;{{ profile.user.username }}</h5>
+                        </div>
+                        <div class="col">
+                            <p class="card-text">{{ profile.bio|make_list|slice:':20'|join:'' }}...</p>
+                        </div>
+                        <p class="mr-4"><small> {{ profile.followed_by.count }} followers </small></p>
+                        <a href="{% url 'social:profile_detail' profile.user %}" class="btn btn-info text-light">View Profile</a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

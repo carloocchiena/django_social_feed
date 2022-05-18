@@ -4,10 +4,12 @@ currently to be done:
 - ~~ follow-unfollow logic and details of follow-unfollow profiles ~~
 - giro frontend
 - ~~ post creation form ~~
-- sistemare upload foto nella dashboard (fatto con JS, da sistemare layout!)
+- ~~ sistemare upload foto nella dashboard e profilo (fatto con JS, da sistemare layout!)~~
 - ~~ order by dei post nel profilo update~~
 - ~~ permettere di eliminare i post ~~ 
 - finire review UI
+- aggiungere icona che dice se segui già un profilo
+- sistemare sizing card follow-unfollow
 - add like button?
 - implementare algoritmo per trovare nuovi utenti?
 
