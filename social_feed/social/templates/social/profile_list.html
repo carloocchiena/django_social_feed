@@ -21,9 +21,9 @@
                         {% endif %}
                         <h5 class="card-title my-auto">&nbsp;{{ profile.user.username }}&nbsp;</h5>
                         {% if profile in user.profile.follows.all %}
-                            <i class="fa-solid fa-user-group align-self-center"></i>
+                            <i title="Following" class="fa-solid fa-user-group align-self-center"></i>
                         {% else %}
-                            <i class="fa-solid fa-user align-self-center"></i>
+                            <i title="Not following" class="fa-solid fa-user align-self-center"></i>
                         {% endif %}
                         </div>
                         <div class="col">
