@@ -11,6 +11,7 @@ currently to be done:
 - ~~aggiungere icona che dice se segui già un profilo~~
 - ~~ sistemare sizing card follow-unfollow ~~
 - esperienza un po' così così, cioè alla fine cosa posso farci con questo social? per ora poco
+- tema cambio password, cambio email, cancellazione utente 
 - add like button?
 - implementare algoritmo per trovare nuovi utenti?
 
