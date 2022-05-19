@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="row mt-3 md-3">
-            <div class="col-4 md-4">
+            <div class="col-3 md-4">
                 <div class="col-6 d-flex">
                     {% if profile.avatar %}
                         <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 7em; margin:auto; display: block;">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-3 md-5">
                 <p>{{ profile.bio }}</p>
                 <p><a href="{% url 'social:follow_detail' profile.user %}">{{ profile.followed_by.count }} followers</p></a>
                 <p><a href="{% url 'social:follow_detail' profile.user %}">{{ profile.follows.count }} following</p></a>
@@ -42,17 +42,19 @@
                 {% endif %}
             </div>
         </div>
-        {% for post in profile.user.posts.all %}
-        <div class="card m-2">
-            <div class="card-body">
-                {% if post.image %}
-                    <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
-                {% endif %}
-                <p class="card-text">{{ post.text }}</p>
-                <p class="card-text"><small class="text-muted">{{ post.created_at }}</small></p>
+        <div class="col-6">
+            {% for post in profile.user.posts.all %}
+            <div class="card m-2">
+                <div class="card-body">
+                    {% if post.image %}
+                        <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
+                    {% endif %}
+                    <p class="card-text">{{ post.text }}</p>
+                    <p class="card-text"><small class="text-muted">{{ post.created_at }}</small></p>
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
 {% endblock content %}

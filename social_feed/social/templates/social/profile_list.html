@@ -19,7 +19,12 @@
                             {% else %}
                             <img class="rounded-circle m-1" src="{% static '/social/avatars/default_avatar.png' %}" style="max-width: 2em; max-height: 2em;">
                         {% endif %}
-                        <h5 class="card-title align-self-center">&nbsp;{{ profile.user.username }}</h5>
+                        <h5 class="card-title my-auto">&nbsp;{{ profile.user.username }}&nbsp;</h5>
+                        {% if profile in user.profile.follows.all %}
+                            <i class="fa-solid fa-user-group align-self-center"></i>
+                        {% else %}
+                            <i class="fa-solid fa-user align-self-center"></i>
+                        {% endif %}
                         </div>
                         <div class="col">
                             <p class="card-text">{{ profile.bio|make_list|slice:':50'|join:'' }}...</p>
