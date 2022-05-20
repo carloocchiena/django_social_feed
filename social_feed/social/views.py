@@ -113,6 +113,19 @@ class ProfileUpdate(UpdateView):
     # User can updates only his\her profile, or get a 404 error
     def get_queryset(self):
         owner = self.request.user
+        return self.model.objects.filter(user=owner)       
+    
+# wip (non viene cancellato il profilo utente)
+class ProfileDelete(DeleteView):
+    """User can delete its profile"""
+    model = models.Profile
+    slug_field = "user__username"
+    template_name_suffix = '_delete'
+    success_url = reverse_lazy('social:register')
+    
+    # Users can delete only their posts, or get a 404 error
+    def get_queryset(self):
+        owner = self.request.user
         return self.model.objects.filter(user=owner)
     
 class PostDelete(DeleteView):
@@ -124,5 +137,4 @@ class PostDelete(DeleteView):
     # Users can delete only their posts, or get a 404 error
     def get_queryset(self):
         owner = self.request.user
-        return self.model.objects.filter(user=owner)  
-
+        return self.model.objects.filter(user=owner)
