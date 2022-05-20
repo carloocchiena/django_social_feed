@@ -9,7 +9,7 @@ currently to be done:
 - finire review UI
 - ~~aggiungere icona che dice se segui già un profilo~~
 - ~~ sistemare sizing card follow-unfollow ~~
-- esperienza un po' così così, cioè alla fine cosa posso farci con questo social? per ora poco
+- check birthdate update in update profile form
 - tema cambio password (non molto fattibile andrebbe inserito email sender), cambio username (da provare inserendolo nel form update profilo), cancellazione utente (ad oggi c'è tutto ma si cancella solo user senza user profile, vedere con i segnali https://stackoverflow.com/questions/9363128/delete-user-when-deleting-userprofile )
 - add like button?
 - implementare algoritmo per trovare nuovi utenti?
