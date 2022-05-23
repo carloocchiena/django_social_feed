@@ -115,19 +115,34 @@ class ProfileUpdate(UpdateView):
         owner = self.request.user
         return self.model.objects.filter(user=owner)       
     
-# wip (non viene cancellato il profilo utente)
-class ProfileDelete(DeleteView):
-    """User can delete its profile"""
+# ----------------------------------------------------------
+# wip (ok lo mette diasattivato ma devo rivedere tutto il giro)
+class ProfileInactive(View):
+    """User can made its profile unactive"""
     model = models.Profile
-    slug_field = "user__username"
-    template_name_suffix = '_delete'
-    success_url = reverse_lazy('social:register')
+    template_name = 'social/profile_delete.html'
     
     # Users can delete only their posts, or get a 404 error
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
     
+    def get(self, request, username):
+        profile = request.user
+        request.user.is_active = False
+        request.user.save()
+        logout(request)
+        return render(request, self.template_name, {'profile': profile})
+    
+    def post(self, request, username):
+        profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
+        current_user_profile = request.user.profile
+        current_user_profile.is_active = False
+        current_user_profile.save()
+        return redirect('social:register')
+
+# ----------------------------------------------------------
+           
 class PostDelete(DeleteView):
     """Delete a post for logged user"""
     model = models.Post

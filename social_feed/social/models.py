@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models import signals
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 # Model to handle user profiles
@@ -25,7 +26,7 @@ def create_profile(sender, instance, created, **kwargs):
         # if you want the new user is also following him/herself add:
         # user_profile.follows.add(instance.profile)
         # user_profile.save()
-
+        
 # Model to handle posts   
 class Post(models.Model):
     """Create post model and manage its attributes""" 

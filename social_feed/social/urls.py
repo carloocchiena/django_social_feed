@@ -15,6 +15,6 @@ urlpatterns = [
     path('follow_detail/<str:slug>/', login_required(views.FollowDetail.as_view()), name='follow_detail'),
     path('profile_detail/<str:username>/', login_required(views.ProfileDetail.as_view()), name='profile_detail'),
     path('profile_update/<str:slug>/', login_required(views.ProfileUpdate.as_view()), name='profile_update'),
-    path('profile_delete/<str:slug>/', login_required(views.ProfileDelete.as_view()), name='profile_delete'), #wip
+    path('profile_delete/<str:username>/', login_required(views.ProfileInactive.as_view()), name='profile_delete'), #wip
     path('post_delete/<slug:slug>/', login_required(views.PostDelete.as_view()), name='post_delete'),
 ]
