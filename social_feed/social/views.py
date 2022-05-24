@@ -1,5 +1,6 @@
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -115,8 +116,6 @@ class ProfileUpdate(UpdateView):
         owner = self.request.user
         return self.model.objects.filter(user=owner)       
     
-# ----------------------------------------------------------
-# wip (ok lo mette diasattivato ma devo rivedere tutto il giro)
 class ProfileInactive(View):
     """User can made its profile unactive"""
     model = models.Profile
@@ -128,20 +127,21 @@ class ProfileInactive(View):
         return self.model.objects.filter(user=owner)
     
     def get(self, request, username):
-        profile = request.user
-        request.user.is_active = False
-        request.user.save()
-        logout(request)
+        profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
         return render(request, self.template_name, {'profile': profile})
     
     def post(self, request, username):
-        profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
-        current_user_profile = request.user.profile
-        current_user_profile.is_active = False
-        current_user_profile.save()
+        owner = self.request.user
+        profile = User.objects.get(username=username)
+        print(owner, profile)
+        if owner == profile:
+            profile.is_active = False
+            owner.is_active = False
+            request.user.save()
+            logout(request)
+        else:
+            raise Http404
         return redirect('social:register')
-
-# ----------------------------------------------------------
            
 class PostDelete(DeleteView):
     """Delete a post for logged user"""
