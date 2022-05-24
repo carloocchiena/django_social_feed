@@ -121,7 +121,7 @@ class ProfileInactive(View):
     model = models.Profile
     template_name = 'social/profile_delete.html'
     
-    # Users can delete only their posts, or get a 404 error
+    # Users can delete only their profile, or get a 404 error
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
@@ -132,12 +132,13 @@ class ProfileInactive(View):
     
     def post(self, request, username):
         owner = self.request.user
-        profile = User.objects.get(username=username)
+        profile = request.user
         print(owner, profile)
         if owner == profile:
             profile.is_active = False
             owner.is_active = False
-            request.user.save()
+            profile.save()
+            owner.save()
             logout(request)
         else:
             raise Http404
