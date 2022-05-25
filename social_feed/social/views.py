@@ -120,25 +120,26 @@ class ProfileInactive(View):
     """User can made its profile unactive"""
     model = models.Profile
     template_name = 'social/profile_delete.html'
-    
-    # Users can delete only their profile, or get a 404 error
-    def get_queryset(self):
-        owner = self.request.user
-        return self.model.objects.filter(user=owner)
-    
+      
     def get(self, request, username):
+        """Users can deactivate only their profile, or get a 404 error"""
+        owner = self.request.user
         profile = get_object_or_404(models.Profile, user__username=self.kwargs['username'])
-        return render(request, self.template_name, {'profile': profile})
+        if owner == profile.user:
+            return render(request, self.template_name, {'profile': profile})
+        else:
+            raise Http404
     
     def post(self, request, username):
+        """Deactivate user profile and update its username"""
         owner = self.request.user
-        profile = request.user
-        print(owner, profile)
-        if owner == profile:
-            profile.is_active = False
+        profile = request.user.profile
+        if owner == profile.user:
             owner.is_active = False
-            profile.save()
+            profile.is_active = False
+            owner.username = f"{owner.username}_deactivated"
             owner.save()
+            profile.save()
             logout(request)
         else:
             raise Http404
@@ -154,3 +155,10 @@ class PostDelete(DeleteView):
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
+    
+class Help(View):
+    """Help page"""
+    template_name = 'social/help.html'
+    
+    def get(self, request):
+        return render(request, self.template_name)

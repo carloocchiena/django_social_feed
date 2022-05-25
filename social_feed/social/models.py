@@ -1,13 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import signals
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Model to handle user profiles
 class Profile(models.Model):
     """Create user profiles and manage their attributes"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=180, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)

@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="row mt-3 md-3">
-            <div class="col-3 md-4">
+            <div class="col-4 md-4">
                 <div class="col-6 d-flex">
                     {% if profile.avatar %}
                         <img class="rounded-circle m-1" src="{{ profile.avatar.url }}" style="max-width: 7em; margin:auto; display: block;">
@@ -56,10 +56,6 @@
             {% endfor %}
         </div>
     </div>
-
-    {{ profile.user.is_active }}
-    {{ profile.is_active }}
-    {{ profile }} <!--delete this row!-->
 
 {% endblock content %}
     
