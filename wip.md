@@ -9,8 +9,9 @@ currently to be done:
 - ~~finire review UI~~
 - ~~aggiungere icona che dice se segui già un profilo~~
 - ~~ sistemare sizing card follow-unfollow ~~
-- add like button?
+- add like button? (es. https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg or even better - page won't reload for each like: https://blog.devgenius.io/django-and-htmx-part-1-ff629ae048f1#cb7d)
 - implementare algoritmo per trovare nuovi utenti?
+- implementare preferenze di contatto per match-making?
 
 - review completa frontend
 - ~~ create login journey (with psw management and such) ~~
