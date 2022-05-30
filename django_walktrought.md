@@ -46,4 +46,4 @@ then I suggest you to add:<br>
 >in [BASIC] section:<br>
 `docstring-min-length=10`<br>
 
-Please also note that .2 and .3 are mostly to avoid VS CODE stressing you with non-existent warnings and errors.
+Please also note that .2 and .3 are in order to optimize VS Code warnings.
