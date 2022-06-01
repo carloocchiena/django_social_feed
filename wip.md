@@ -13,6 +13,10 @@ currently to be done:
 - implementare algoritmo per trovare nuovi utenti?
 - implementare preferenze di contatto per match-making?
 - aggiungere bottone per generare coin per remunerae utente
+(vedi: https://stackoverflow.com/questions/23262838/django-coin-points-system-ideas
+https://stackoverflow.com/questions/53490168/post-and-save-django-variable-doesn%C2%B4t-work
+https://stackoverflow.com/questions/15295809/django-model-form-save-int-object-has-no-attribute-save
+https://stackoverflow.com/questions/18864313/form-seemingly-not-returning-post-values-or-saving-to-db-on-django)
 
 - review completa frontend
 - ~~ create login journey (with psw management and such) ~~

@@ -36,8 +36,10 @@ class Dashboard(View):
             post.user = request.user
             post.save()
             coins += 10
-            print(coins) #non salva nulla boh
-            request.user.profile.save()
+            post.user = coins
+            print(coins) 
+            post.user.save()
+            request.user.profile.save() #non salva nulla boh
             return redirect('social:dashboard')
             
         return render(request, self.template_name, {'posts': posts, 'form': form})
