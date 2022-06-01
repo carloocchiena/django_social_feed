@@ -30,10 +30,14 @@ class Dashboard(View):
         user_posts = models.Post.objects.filter(user=request.user)
         follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
         posts = user_posts | follower_posts
+        coins = request.user.profile.coins
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            coins += 10
+            print(coins) #non salva nulla boh
+            request.user.profile.save()
             return redirect('social:dashboard')
             
         return render(request, self.template_name, {'posts': posts, 'form': form})
