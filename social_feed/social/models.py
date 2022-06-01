@@ -15,7 +15,7 @@ class Profile(models.Model):
     follows = models.ManyToManyField('self', related_name='followed_by', symmetrical=False, blank=True)
     coins = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return self.user.username
 

@@ -35,7 +35,6 @@ class Dashboard(View):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            coins += 10
             post.user = coins
             print(coins) 
             post.user.save()
