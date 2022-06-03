@@ -1,5 +1,6 @@
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import F
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
@@ -30,15 +31,14 @@ class Dashboard(View):
         user_posts = models.Post.objects.filter(user=request.user)
         follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
         posts = user_posts | follower_posts
-        coins = request.user.profile.coins
+        coins = models.Profile.objects.get(user=request.user).coins # check
+        current_user_profile = request.user.profile # check
         if form.is_valid():
+            current_user_profile.coins += 15 # check
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            post.user = coins
-            print(coins) 
-            post.user.save()
-            request.user.profile.save() #non salva nulla boh
+            current_user_profile.save() # check
             return redirect('social:dashboard')
             
         return render(request, self.template_name, {'posts': posts, 'form': form})
