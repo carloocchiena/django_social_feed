@@ -12,6 +12,8 @@ currently to be done:
 - add like button? (es. https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg or even better - page won't reload for each like: https://blog.devgenius.io/django-and-htmx-part-1-ff629ae048f1#cb7d)
 - implementare algoritmo per trovare nuovi utenti?
 - implementare preferenze di contatto per match-making?
+- aggiungere bottone per generare coin per remunerae utente
+ok ce l'ho fatta ora tutto da ripulire ma funziona cazzoooo!!
 
 - review completa frontend
 - ~~ create login journey (with psw management and such) ~~

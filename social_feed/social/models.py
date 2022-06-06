@@ -13,8 +13,9 @@ class Profile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     avatar = models.ImageField(upload_to='social/static/social/avatars/', null=True, blank=True) 
     follows = models.ManyToManyField('self', related_name='followed_by', symmetrical=False, blank=True)
+    coins = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return self.user.username
 
