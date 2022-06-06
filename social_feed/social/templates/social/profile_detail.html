@@ -51,7 +51,14 @@
                         <img class="img-thumbnails" src="{{ post.image.url }}" style="max-width: 200px;">
                     {% endif %}
                     <p class="card-text">{{ post.text }}</p>
-                    <p class="card-text"><small class="text-muted">{{ post.created_at }}</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            {{ post.created_at }}
+                            {% if post.user.profile.user == request.user %}
+                                &nbsp;<a href="{% url 'social:post_delete' post.id %}">Delete it<i class="fa fa-trash"></i></a>
+                            {% endif %}
+                        </small>
+                    </p>
                 </div>
             </div>
             {% endfor %}

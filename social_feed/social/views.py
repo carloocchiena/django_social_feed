@@ -2,17 +2,18 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import F
 from django.http import Http404
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, FormView, UpdateView, DeleteView
 
 from . import models, forms
+from .coins_data import plus_coins, minus_coins
 
 class Dashboard(View):
     """Dashboard view with all posts items for current user.
     GET return list of posts in ascending order from user followed by the user and user itself.
-    POST add a post from logged user.
+    POST add a post from logged user and add 15 coins.
     """
     model = models.Post
     template_name = 'social/dashboard.html'
@@ -31,14 +32,14 @@ class Dashboard(View):
         user_posts = models.Post.objects.filter(user=request.user)
         follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
         posts = user_posts | follower_posts
-        coins = models.Profile.objects.get(user=request.user).coins # check
-        current_user_profile = request.user.profile # check
+        coins = models.Profile.objects.get(user=request.user).coins 
+        current_user_profile = request.user.profile 
         if form.is_valid():
-            current_user_profile.coins += 15 # check
+            current_user_profile.coins += plus_coins 
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            current_user_profile.save() # check
+            current_user_profile.save() 
             return redirect('social:dashboard')
             
         return render(request, self.template_name, {'posts': posts, 'form': form})
@@ -154,12 +155,22 @@ class PostDelete(DeleteView):
     """Delete a post for logged user"""
     model = models.Post
     slug_field = "id"
-    success_url = reverse_lazy('social:dashboard')
-    
+    # success_url = reverse_lazy('social:dashboard')
+        
     # Users can delete only their posts, or get a 404 error
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
+    
+    # remove 10 coins if post is deleted
+    def get_success_url(self):
+        user = self.request.user
+        current_user_profile = self.request.user.profile 
+        coins = models.Profile.objects.get(user=user).coins 
+        current_user_profile.coins -= minus_coins 
+        current_user_profile.save() 
+        return reverse('social:dashboard')
+    
     
 class Help(View):
     """Help page"""
