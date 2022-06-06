@@ -171,7 +171,6 @@ class PostDelete(DeleteView):
         current_user_profile.save() 
         return reverse('social:dashboard')
     
-    
 class Help(View):
     """Help page"""
     template_name = 'social/help.html'
