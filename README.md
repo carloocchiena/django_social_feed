@@ -11,6 +11,7 @@ Users can:
 - Follow and unfollow users
 - See the main dashboard with all the posts in chronological order
 - Create new posts, uploading a picture and seeing a preview
+- Get coins on some actions (such as creating a new post)
 - Delete their posts
 - Delete (deactivate) their profile
 - Check the help page
@@ -24,5 +25,6 @@ At the moment it's just a box. There is not a lot to do.
 I'd like to add:
 - some kind of algo to find new users to follow based on criterias matching user preferences
 - some kind of algo to sort posts by criterias matching user preferences
+- coins management logics
 
 I could have add likes and comments to the posts, but tbh I already hate those features from existing social media and I'd like to find something different to generate a healthier interaction.
