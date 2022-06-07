@@ -1,10 +1,9 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import signals
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import User
 
-# Model to handle user profiles
 class Profile(models.Model):
     """Create user profiles and manage their attributes"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -29,7 +28,6 @@ def create_profile(sender, instance, created, **kwargs):
         # user_profile.follows.add(instance.profile)
         # user_profile.save()
         
-# Model to handle posts   
 class Post(models.Model):
     """Create post model and manage its attributes""" 
     user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)

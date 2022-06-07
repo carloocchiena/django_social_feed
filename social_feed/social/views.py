@@ -1,6 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.db.models import F
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.urls import reverse_lazy
@@ -19,7 +18,7 @@ class Dashboard(View):
     template_name = 'social/dashboard.html'
     
     def get(self, request):
-        """Manage posts views for the followed users and the user itself"""
+        """Return posts views for the followed users and the user itself"""
         form = forms.PostForm(request.POST or None)
         user_posts = models.Post.objects.filter(user=request.user)
         follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
@@ -47,7 +46,7 @@ class Dashboard(View):
 class UserRegistration(View):
     """Manage user registration.
     GET render the form.
-    POST create a new user and redirect to the user profile.
+    POST create a new user, logs it, and redirect to the user's profile.
     """
     model = models.Profile
     template_name = 'social/register.html'

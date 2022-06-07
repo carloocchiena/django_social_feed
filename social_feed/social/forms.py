@@ -1,7 +1,6 @@
 from django import forms
 from . import models
 
-# da testare
 class ProfileEditForm(forms.ModelForm):
     """Manage user creation"""
     class Meta:
