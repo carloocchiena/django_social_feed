@@ -30,9 +30,13 @@ I'd like to add:
 I could have add likes and comments to the posts, but tbh I already hate those features from existing social media and I'd like to find something different to generate a healthier interaction.
 
 ### Screenshots
+<br><br>
 ![image](https://user-images.githubusercontent.com/57464184/172599045-bebd4cd5-4b29-4a1f-8bfc-850c0677228b.png)
+<br><br>
 ![image](https://user-images.githubusercontent.com/57464184/172599079-a14c464c-3186-4084-a817-fec1b11d3afe.png)
+<br><br>
 ![image](https://user-images.githubusercontent.com/57464184/172599113-1711eb5c-6f88-4e55-a5ec-2122b888774d.png)
+<br><br>
 ![image](https://user-images.githubusercontent.com/57464184/172599155-cdd5c964-f71a-4bbb-bcbc-4e16f5c89bb4.png)
 
 
