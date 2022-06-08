@@ -17,7 +17,7 @@ Users can:
 - Check the help page
 
 ### CSS Framework
-While in the past project I used Bulma, this time I sticked again to Bootstrap.<br>
+While in the past project I used Bulma, this time I sticked again to Bootstrap 5.<br>
 In the end mostly for a matter of recicle and to make the project more scalable.
 
 ### What's missing
