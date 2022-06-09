@@ -19,7 +19,7 @@ class Dashboard(View):
     
     def get(self, request):
         """Return posts views for the followed users and the user itself"""
-        form = forms.PostForm(request.POST or None)
+        form = forms.PostForm(request.GET)
         user_posts = models.Post.objects.filter(user=request.user)
         follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
         posts = user_posts | follower_posts
@@ -27,7 +27,7 @@ class Dashboard(View):
     
     def post(self, request):
         """Manage posts creation for the user"""
-        form = forms.PostForm(request.POST, request.FILES or None)
+        form = forms.PostForm(request.POST, request.FILES)
         user_posts = models.Post.objects.filter(user=request.user)
         follower_posts = models.Post.objects.filter(user__profile__in=request.user.profile.follows.all())
         posts = user_posts | follower_posts
@@ -40,8 +40,8 @@ class Dashboard(View):
             post.save()
             current_user_profile.save() 
             return redirect('social:dashboard')
-            
-        return render(request, self.template_name, {'posts': posts, 'form': form})
+        else:
+            return render(request, self.template_name, {'posts': posts, 'form': form})
     
 class UserRegistration(View):
     """Manage user registration.
@@ -95,7 +95,7 @@ class ProfileDetail(View):
         elif action == 'unfollow':
             current_user_profile.follows.remove(profile)
         current_user_profile.save()
-        return render(request, self.template_name, {'profile': profile})
+        return redirect('social:profile_detail', username=profile.user)
     
 class FollowDetail(DetailView):
     """Display followers and following."""
