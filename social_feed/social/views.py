@@ -7,7 +7,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, FormView, UpdateView, DeleteView
 
 from . import models, forms
-from .coins_data import plus_coins, minus_coins
+from .coin_data import CoinData
 
 class Dashboard(View):
     """Dashboard view with all posts items for current user.
@@ -34,7 +34,7 @@ class Dashboard(View):
         coins = models.Profile.objects.get(user=request.user).coins 
         current_user_profile = request.user.profile 
         if form.is_valid():
-            current_user_profile.coins += plus_coins 
+            current_user_profile.coins += CoinData.plus_coins 
             post = form.save(commit=False)
             post.user = request.user
             post.save()
@@ -166,7 +166,7 @@ class PostDelete(DeleteView):
         user = self.request.user
         current_user_profile = self.request.user.profile 
         coins = models.Profile.objects.get(user=user).coins 
-        current_user_profile.coins -= minus_coins 
+        current_user_profile.coins -= CoinData.minus_coins 
         current_user_profile.save() 
         return reverse('social:dashboard')
     
