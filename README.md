@@ -38,6 +38,3 @@ I could have add likes and comments to the posts, but tbh I already hate those f
 ![image](https://user-images.githubusercontent.com/57464184/172599113-1711eb5c-6f88-4e55-a5ec-2122b888774d.png)
 <br><br>
 ![image](https://user-images.githubusercontent.com/57464184/172599155-cdd5c964-f71a-4bbb-bcbc-4e16f5c89bb4.png)
-
-
-
